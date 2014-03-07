@@ -8,7 +8,8 @@ imports
   aterm-eq
   spoofax_testing
   check
-
+  origin
+		
 rules
   
   spt-desugar:
@@ -47,8 +48,9 @@ rules
   check-expectation(|ast, selections, messages) :
     ResolveTo(from, to) -> error
     where
-      from' := <resolve-selection(|selections)> from;
-      to'   := <resolve-selection(|selections)> to
+    	a-ast := <LastAnalyzedAst>;
+      from' := <resolve-selection(|selections); find-innermost-origin-term(|a-ast)> from;
+      to'   := <resolve-selection(|selections); find-innermost-origin-term(|a-ast)> to
     with
       input1    := <get-service-input-term> from';
       input2    := <get-service-input-term-without-ancestor> from';
