@@ -235,7 +235,7 @@ rules
     with
       (errors, _, _) := messages
     where
-      <gt> (<string-to-int> n, 0); <eq> (<length> errors, 0)
+      <gt> (<string-to-int> n, 0); <lt> (<length> errors, <string-to-int> n)
       
   check-expectation(|ast, selections, messages) :
     Warnings(n) -> $[No warnings expected: [<grab-warnings> messages]]
