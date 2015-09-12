@@ -27,11 +27,15 @@ strategies
     )
   ; flatten-list
   
+  test-runner-x =
+    testlistener-init
+  ; !(1, 2, 3)
+   
   test-runner =
     testlistener-init 
   ; find-all-testsuites-in-project
   ; map(testlistener-add-testsuite(|<get-testsuite-name-from-file>,<id>))
-  ; map(try(run-testsuite))
+  ; try(map(run-testsuite))
   ; !None()
 
   test-runner-file:
@@ -52,10 +56,10 @@ strategies
     where 
       ast  := <parse-spt-file> file
     ; ast' := <topdown(repeat(spt-desugar)); alltd(spt-desugar-refactoring-conditions)> ast
-    // ; (ast', _, _, _) := <editor-analyze>(ast, path, project-path)
-    ; testcases := <collect-all(testlistener-add-testcase(|file, <test-to-description>,<origin-offset;Fst>))>ast'
-    ; <map(run-testcase(|file))>testcases
-  
+    // ; (ast', _, _, _) := <editor-analyze> (ast, path, project-path)
+    ; testcases := <collect-all(testlistener-add-testcase(|file, <test-to-description>, <origin-offset; Fst>))> ast'
+    ; <map(run-testcase(|file))> testcases
+
   get-testsuite-name :
     testsuite(hds, _) -> name
     where name := <fetch-elem(?Name(<id>))>hds
@@ -67,7 +71,7 @@ strategies
     ?tst
   ; test-to-description => name
   ; testlistener-start-testcase(|testsuite, name)
-  ; if errors := <check-error>tst ; not((id,[])) then
+  ; if errors := <check-error> tst ; not((id,[])) then
       testlistener-finish-testcase(|testsuite, name, False(), errors)
     else
       testlistener-finish-testcase(|testsuite, name, True(), []) 

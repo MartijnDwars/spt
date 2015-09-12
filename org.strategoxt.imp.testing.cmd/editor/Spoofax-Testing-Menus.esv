@@ -5,10 +5,10 @@ module Spoofax-Testing-Menus
 
 menus
   menu: "OldBuilders"
-    action: "testrunnerfile" = test-runner-file
-  	action  : "Show abstract syntax (for selection)"          = generate-aterm (openeditor) (realtime) (source) // (meta) 
-  	action  : "Generate missing output file with current AST" = generate-ast-file             
-  	action : "Run testsuites" = test-runner
+    action: "testrunnerfile"                                = test-runner-file
+    action: "Show abstract syntax (for selection)"          = generate-aterm (openeditor) (realtime) (source) // (meta) 
+    action: "Generate missing output file with current AST" = generate-ast-file             
+    action: "Run testsuites"                                = test-runner
   
   menu: "Syntax"
     

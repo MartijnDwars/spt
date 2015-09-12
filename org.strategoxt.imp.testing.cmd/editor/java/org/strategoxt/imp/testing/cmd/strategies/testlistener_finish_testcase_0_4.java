@@ -41,20 +41,19 @@ public class testlistener_finish_testcase_0_4 extends Strategy {
 		}
 		
 		try {
-//			ITestListener listener = ListenerWrapper.instance();
-//			if (appl.equals("True"))
-//				listener.finishTestcase(ts, desc, true, messages);
-//			else
-//				listener.finishTestcase(ts, desc, false, messages);
+			boolean stopTesting = false;
+
 			Iterator<ITestReporter> it = TestReporterProvider.getInstance().getReporters();
 			while (it != null && it.hasNext()) {
-				if (appl.equals("True")) {
-					it.next().finishTestcase(ts, desc, true, messages);
-				} else {
-					it.next().finishTestcase(ts, desc, false, messages);
+				if (!it.next().finishTestcase(ts, desc, appl.equals("True"), messages)) {
+					stopTesting = true;
 				}
 			}
-			
+
+			// By returning null the strategy will fail, signaling to stop testing
+			if (stopTesting) {
+				return null;
+			}
 		} catch (Exception e) {
 			ITermFactory factory = context.getFactory();
 //			Environment.logException("Failed to finish test case to listener. Maybe no listeners?", e);

@@ -26,10 +26,10 @@ public class testlistener_finish_testcase_0_3 extends Strategy {
 
 		try {
 			ITestListener listener = ListenerWrapper.instance();
-			if (appl.equals("True"))
-				listener.finishTestcase(ts, desc, true);
-			else
-				listener.finishTestcase(ts, desc, false);
+			
+			if (!listener.finishTestcase(ts, desc, appl.equals("True"))) {
+				return null; // Does returning null make the strategy fail?
+			}
 		} catch (Exception e) {
 			ITermFactory factory = context.getFactory();
 			Environment.logException("Failed to finish test case to listener. Maybe no listeners?", e);

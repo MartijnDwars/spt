@@ -19,7 +19,7 @@ public interface ITestListener {
 
 	void startTestcase(String testsuite, String description) throws Exception;
 
-	void finishTestcase(String testsuite, String description, boolean succeeded) throws Exception;
+	boolean finishTestcase(String testsuite, String description, boolean succeeded) throws Exception;
 
 	void disableRefresh() throws Exception;
 

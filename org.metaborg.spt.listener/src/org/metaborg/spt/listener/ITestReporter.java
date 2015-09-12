@@ -41,11 +41,13 @@ public interface ITestReporter {
 	
 	/**
 	 * Notify this reporter that a test case execution has finished.
+	 *
 	 * @param testsuiteFile the file name of the test suite to which the finished test case belongs
 	 * @param description the description (i.e. name) of the test case
 	 * @param succeeded true iff the test case succeeded
 	 * @param messages an optional list of errors, warnings or notes generated during test execution
+	 * @return Flag indicating whether to continue (true) or stop (false) running tests
 	 */
-	public void finishTestcase(String testsuiteFile, String description,
+	public boolean finishTestcase(String testsuiteFile, String description,
 			boolean succeeded, Collection<String> messages) throws Exception;
 }

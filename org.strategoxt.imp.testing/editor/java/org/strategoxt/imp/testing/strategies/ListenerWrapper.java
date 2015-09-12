@@ -128,7 +128,7 @@ public final class ListenerWrapper implements ITestListener {
 	 * @see org.strategoxt.imp.testing.listener.ITestListener#finishTestcase(java.lang.String, java.lang.String,
 	 * boolean)
 	 */
-	public void finishTestcase(String testsuite, String description, boolean succeeded)
+	public boolean finishTestcase(String testsuite, String description, boolean succeeded)
 			throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, SecurityException,
 			NoSuchMethodException, CoreException {
 
@@ -136,8 +136,7 @@ public final class ListenerWrapper implements ITestListener {
 		Method m = wrapped.getClass().getMethod("finishTestcase",
 				new Class[] { String.class, String.class, boolean.class });
 		if (!Modifier.isAbstract(m.getModifiers())) {
-			m.invoke(wrapped, testsuite, description, succeeded);
-
+			return m.invoke(wrapped, testsuite, description, succeeded);
 		}
 	}
 
